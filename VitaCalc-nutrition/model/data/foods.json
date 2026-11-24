@@ -1,0 +1,647 @@
+{
+  "avoine": {
+    "label": "Flocons d’avoine secs",
+    "family": "porridge",
+    "group": "starch",
+    "photo": "avoine",
+    "coefficient": 1.02,
+    "fdc": 173904,
+    "nutrients": {
+      "fibre": 10.1,
+      "fat": 6.52,
+      "carbs": 67.7,
+      "kcal": 379.0,
+      "protein": 13.15
+    }
+  },
+  "avoine_instant": {
+    "label": "Flocons d’avoine instantanés nature",
+    "family": "porridge",
+    "group": "starch",
+    "photo": "profile",
+    "coefficient": 1.1,
+    "fdc": 171661,
+    "nutrients": {
+      "fat": 6.9,
+      "carbs": 69.52,
+      "kcal": 362.0,
+      "protein": 11.92,
+      "fibre": 10.0
+    }
+  },
+  "riz": {
+    "label": "Riz complet cuit",
+    "family": "grain",
+    "group": "starch",
+    "photo": "riz",
+    "coefficient": 1.0,
+    "fdc": 169704,
+    "nutrients": {
+      "fibre": 1.6,
+      "protein": 2.74,
+      "fat": 0.97,
+      "carbs": 25.58,
+      "kcal": 123.0
+    }
+  },
+  "riz_rond": {
+    "label": "Riz complet à grain moyen cuit",
+    "family": "grain",
+    "group": "starch",
+    "photo": "riz",
+    "coefficient": 1.04,
+    "fdc": 168875,
+    "nutrients": {
+      "fibre": 1.8,
+      "protein": 2.32,
+      "fat": 0.83,
+      "carbs": 23.51,
+      "kcal": 112.0
+    }
+  },
+  "pates": {
+    "label": "Pâtes complètes cuites",
+    "family": "grain",
+    "group": "starch",
+    "photo": "pates",
+    "coefficient": 1.08,
+    "fdc": 168910,
+    "nutrients": {
+      "fat": 1.71,
+      "carbs": 30.07,
+      "kcal": 149.0,
+      "protein": 5.99,
+      "fibre": 3.9
+    }
+  },
+  "pates_semi": {
+    "label": "Pâtes semi-complètes cuites",
+    "family": "grain",
+    "group": "starch",
+    "photo": "pates",
+    "coefficient": 1.04,
+    "fdc": 172024,
+    "nutrients": {
+      "fat": 1.48,
+      "carbs": 30.87,
+      "kcal": 156.0,
+      "protein": 5.67,
+      "fibre": 4.5
+    }
+  },
+  "pates_claires": {
+    "label": "Pâtes de blé cuites",
+    "family": "grain",
+    "group": "starch",
+    "photo": "pates",
+    "coefficient": 1.0,
+    "fdc": 168928,
+    "nutrients": {
+      "fat": 0.93,
+      "protein": 5.8,
+      "fibre": 1.8,
+      "carbs": 30.86,
+      "kcal": 158.0
+    }
+  },
+  "couscous": {
+    "label": "Semoule de couscous cuite",
+    "family": "grain",
+    "group": "starch",
+    "photo": "couscous",
+    "coefficient": 1.04,
+    "fdc": 169700,
+    "nutrients": {
+      "fat": 0.16,
+      "carbs": 23.22,
+      "kcal": 112.0,
+      "fibre": 1.4,
+      "protein": 3.79
+    }
+  },
+  "boulgour": {
+    "label": "Boulgour cuit",
+    "family": "grain",
+    "group": "starch",
+    "photo": "couscous",
+    "coefficient": 1.05,
+    "fdc": 170287,
+    "nutrients": {
+      "fibre": 4.5,
+      "protein": 3.08,
+      "fat": 0.24,
+      "carbs": 18.58,
+      "kcal": 83.0
+    }
+  },
+  "orge": {
+    "label": "Orge perlé cuit",
+    "family": "grain",
+    "group": "starch",
+    "photo": "riz",
+    "coefficient": 1.02,
+    "fdc": 170285,
+    "nutrients": {
+      "kcal": 123.0,
+      "protein": 2.26,
+      "fibre": 3.8,
+      "fat": 0.44,
+      "carbs": 28.22
+    }
+  },
+  "pain": {
+    "label": "Pain complet",
+    "family": "bread",
+    "group": "starch",
+    "photo": "pain",
+    "coefficient": 1.22,
+    "fdc": 172688,
+    "nutrients": {
+      "fat": 3.5,
+      "carbs": 42.71,
+      "kcal": 252.0,
+      "protein": 12.45,
+      "fibre": 6.0
+    }
+  },
+  "pita": {
+    "label": "Pain pita complet",
+    "family": "bread",
+    "group": "starch",
+    "photo": "pain",
+    "coefficient": 1.28,
+    "fdc": 174916,
+    "nutrients": {
+      "fat": 1.71,
+      "fibre": 6.1,
+      "protein": 9.8,
+      "carbs": 55.89,
+      "kcal": 262.0
+    }
+  },
+  "pain_multicereales": {
+    "label": "Pain multicéréales",
+    "family": "bread",
+    "group": "starch",
+    "photo": "pain",
+    "coefficient": 1.31,
+    "fdc": 168013,
+    "nutrients": {
+      "fat": 4.23,
+      "carbs": 43.34,
+      "kcal": 265.0,
+      "fibre": 7.4,
+      "protein": 13.36
+    }
+  },
+  "pain_maison": {
+    "label": "Pain de blé complet maison",
+    "family": "bread",
+    "group": "starch",
+    "photo": "pain",
+    "coefficient": 1.14,
+    "fdc": 172690,
+    "nutrients": {
+      "fibre": 6.0,
+      "protein": 8.4,
+      "fat": 5.4,
+      "carbs": 51.4,
+      "kcal": 278.0
+    }
+  },
+  "pain_plat": {
+    "label": "Pain plat chapati complet",
+    "family": "bread",
+    "group": "starch",
+    "photo": "pain",
+    "coefficient": 1.25,
+    "fdc": 174075,
+    "nutrients": {
+      "fibre": 9.7,
+      "protein": 7.85,
+      "carbs": 46.13,
+      "kcal": 299.0,
+      "fat": 9.2
+    }
+  },
+  "yaourt": {
+    "label": "Yaourt nature entier",
+    "family": "dairy",
+    "group": "animal",
+    "photo": "yaourt",
+    "coefficient": 1.04,
+    "fdc": 171284,
+    "nutrients": {
+      "kcal": 61.0,
+      "protein": 3.47,
+      "fibre": 0.0,
+      "fat": 3.25,
+      "carbs": 4.66
+    }
+  },
+  "yaourt_allege": {
+    "label": "Yaourt nature demi-écrémé",
+    "family": "dairy",
+    "group": "animal",
+    "photo": "yaourt",
+    "coefficient": 1.14,
+    "fdc": 170886,
+    "nutrients": {
+      "kcal": 63.0,
+      "fat": 1.55,
+      "carbs": 7.04,
+      "protein": 5.25,
+      "fibre": 0.0
+    }
+  },
+  "fromage_blanc": {
+    "label": "Fromage cottage à 2 % MG",
+    "family": "dairy",
+    "group": "animal",
+    "photo": "yaourt",
+    "coefficient": 1.3,
+    "fdc": 172182,
+    "nutrients": {
+      "fat": 2.27,
+      "carbs": 4.76,
+      "kcal": 81.0,
+      "protein": 10.45,
+      "fibre": 0.0
+    }
+  },
+  "lait_entier": {
+    "label": "Lait entier",
+    "family": "dairy",
+    "group": "animal",
+    "photo": "lait",
+    "coefficient": 1.01,
+    "fdc": 171265,
+    "nutrients": {
+      "fat": 3.25,
+      "carbs": 4.8,
+      "kcal": 61.0,
+      "fibre": 0.0,
+      "protein": 3.15
+    }
+  },
+  "lait_demi": {
+    "label": "Lait demi-écrémé enrichi en solides laitiers",
+    "family": "dairy",
+    "group": "animal",
+    "photo": "lait",
+    "coefficient": 1.01,
+    "fdc": 170870,
+    "nutrients": {
+      "protein": 3.48,
+      "fibre": 0.0,
+      "fat": 1.92,
+      "carbs": 4.97,
+      "kcal": 51.0
+    }
+  },
+  "banane": {
+    "label": "Banane",
+    "family": "fruit",
+    "group": "fruit",
+    "photo": "fruit",
+    "coefficient": 1.0,
+    "fdc": 173944,
+    "nutrients": {
+      "carbs": 22.84,
+      "kcal": 89.0,
+      "fibre": 2.6,
+      "protein": 1.09,
+      "fat": 0.33
+    }
+  },
+  "pomme": {
+    "label": "Pomme avec peau",
+    "family": "fruit",
+    "group": "fruit",
+    "photo": "fruit",
+    "coefficient": 1.07,
+    "fdc": 171688,
+    "nutrients": {
+      "carbs": 13.81,
+      "kcal": 52.0,
+      "fat": 0.17,
+      "fibre": 2.4,
+      "protein": 0.26
+    }
+  },
+  "poire": {
+    "label": "Poire",
+    "family": "fruit",
+    "group": "fruit",
+    "photo": "fruit",
+    "coefficient": 1.15,
+    "fdc": 169118,
+    "nutrients": {
+      "fat": 0.14,
+      "carbs": 15.23,
+      "kcal": 57.0,
+      "protein": 0.36,
+      "fibre": 3.1
+    }
+  },
+  "orange": {
+    "label": "Orange",
+    "family": "fruit",
+    "group": "fruit",
+    "photo": "fruit",
+    "coefficient": 1.12,
+    "fdc": 169097,
+    "nutrients": {
+      "fat": 0.12,
+      "carbs": 11.75,
+      "kcal": 47.0,
+      "fibre": 2.4,
+      "protein": 0.94
+    }
+  },
+  "noix": {
+    "label": "Noix",
+    "family": "nuts",
+    "group": "legume",
+    "photo": "noix",
+    "coefficient": 1.3,
+    "fdc": 170187,
+    "nutrients": {
+      "carbs": 13.71,
+      "kcal": 654.0,
+      "protein": 15.23,
+      "fibre": 6.7,
+      "fat": 65.21
+    }
+  },
+  "pecan": {
+    "label": "Noix de pécan",
+    "family": "nuts",
+    "group": "legume",
+    "photo": "noix",
+    "coefficient": 1.35,
+    "fdc": 170182,
+    "nutrients": {
+      "fat": 71.97,
+      "protein": 9.17,
+      "fibre": 9.6,
+      "carbs": 13.86,
+      "kcal": 691.0
+    }
+  },
+  "amandes": {
+    "label": "Amandes",
+    "family": "nuts",
+    "group": "legume",
+    "photo": "noix",
+    "coefficient": 1.21,
+    "fdc": 170567,
+    "nutrients": {
+      "protein": 21.15,
+      "fibre": 12.5,
+      "fat": 49.93,
+      "carbs": 21.55,
+      "kcal": 579.0
+    }
+  },
+  "cacahuetes": {
+    "label": "Cacahuètes grillées non salées",
+    "family": "nuts",
+    "group": "legume",
+    "photo": "noix",
+    "coefficient": 1.04,
+    "fdc": 173806,
+    "nutrients": {
+      "fibre": 8.4,
+      "protein": 24.35,
+      "carbs": 21.26,
+      "kcal": 587.0,
+      "fat": 49.66
+    }
+  },
+  "poulet": {
+    "label": "Blanc de poulet rôti",
+    "family": "poultry",
+    "group": "animal",
+    "photo": "volaille",
+    "coefficient": 1.5,
+    "fdc": 171477,
+    "nutrients": {
+      "fat": 3.57,
+      "carbs": 0.0,
+      "kcal": 165.0,
+      "protein": 31.02,
+      "fibre": 0.0
+    }
+  },
+  "dinde": {
+    "label": "Blanc de dinde rôti",
+    "family": "poultry",
+    "group": "animal",
+    "photo": "volaille",
+    "coefficient": 1.62,
+    "fdc": 171496,
+    "nutrients": {
+      "protein": 30.13,
+      "fat": 2.08,
+      "kcal": 147.0,
+      "fibre": 0.0,
+      "carbs": 0.0
+    }
+  },
+  "oeuf": {
+    "label": "Œuf dur",
+    "family": "eggs",
+    "group": "animal",
+    "photo": "oeuf",
+    "coefficient": 1.07,
+    "fdc": 173424,
+    "nutrients": {
+      "fibre": 0.0,
+      "kcal": 155.0,
+      "protein": 12.58,
+      "fat": 10.61,
+      "carbs": 1.12
+    }
+  },
+  "oeuf_poche": {
+    "label": "Œuf poché",
+    "family": "eggs",
+    "group": "animal",
+    "photo": "oeuf",
+    "coefficient": 1.07,
+    "fdc": 172186,
+    "nutrients": {
+      "fibre": 0.0,
+      "kcal": 143.0,
+      "fat": 9.47,
+      "carbs": 0.71,
+      "protein": 12.51
+    }
+  },
+  "thon": {
+    "label": "Thon au naturel égoutté",
+    "family": "fish",
+    "group": "animal",
+    "photo": "poisson",
+    "coefficient": 1.66,
+    "fdc": 171986,
+    "nutrients": {
+      "protein": 25.51,
+      "fat": 0.82,
+      "kcal": 116.0,
+      "carbs": 0.0,
+      "fibre": 0.0
+    }
+  },
+  "cabillaud": {
+    "label": "Cabillaud cuit",
+    "family": "fish",
+    "group": "animal",
+    "photo": "poisson",
+    "coefficient": 2.01,
+    "fdc": 171956,
+    "nutrients": {
+      "kcal": 105.0,
+      "fat": 0.86,
+      "carbs": 0.0,
+      "protein": 22.83,
+      "fibre": 0.0
+    }
+  },
+  "lentille": {
+    "label": "Lentilles cuites",
+    "family": "beans",
+    "group": "legume",
+    "photo": "haricot",
+    "coefficient": 1.0,
+    "fdc": 172421,
+    "nutrients": {
+      "carbs": 20.13,
+      "kcal": 116.0,
+      "protein": 9.02,
+      "fibre": 7.9,
+      "fat": 0.38
+    }
+  },
+  "haricot": {
+    "label": "Haricots rouges cuits",
+    "family": "beans",
+    "group": "legume",
+    "photo": "haricot",
+    "coefficient": 1.05,
+    "fdc": 173740,
+    "nutrients": {
+      "kcal": 127.0,
+      "fat": 0.5,
+      "carbs": 22.8,
+      "protein": 8.67,
+      "fibre": 6.4
+    }
+  },
+  "pois": {
+    "label": "Pois chiches cuits",
+    "family": "beans",
+    "group": "legume",
+    "photo": "pois",
+    "coefficient": 1.1,
+    "fdc": 173757,
+    "nutrients": {
+      "fibre": 7.6,
+      "carbs": 27.42,
+      "kcal": 164.0,
+      "fat": 2.59,
+      "protein": 8.86
+    }
+  },
+  "carotte": {
+    "label": "Carottes cuites",
+    "family": "veggie",
+    "group": "vegetable",
+    "photo": "legume",
+    "coefficient": 1.0,
+    "fdc": 170394,
+    "nutrients": {
+      "fat": 0.18,
+      "protein": 0.76,
+      "fibre": 3.0,
+      "carbs": 8.22,
+      "kcal": 35.0
+    }
+  },
+  "brocoli": {
+    "label": "Brocoli cuit",
+    "family": "veggie",
+    "group": "vegetable",
+    "photo": "legume",
+    "coefficient": 1.3,
+    "fdc": 169967,
+    "nutrients": {
+      "fat": 0.41,
+      "fibre": 3.3,
+      "protein": 2.38,
+      "carbs": 7.18,
+      "kcal": 35.0
+    }
+  },
+  "haricot_vert": {
+    "label": "Haricots verts cuits",
+    "family": "veggie",
+    "group": "vegetable",
+    "photo": "legume",
+    "coefficient": 1.2,
+    "fdc": 169141,
+    "nutrients": {
+      "carbs": 7.88,
+      "kcal": 35.0,
+      "fibre": 3.2,
+      "protein": 1.89,
+      "fat": 0.28
+    }
+  },
+  "courgette": {
+    "label": "Courgettes cuites",
+    "family": "veggie",
+    "group": "vegetable",
+    "photo": "legume",
+    "coefficient": 1.12,
+    "fdc": 169292,
+    "nutrients": {
+      "protein": 1.14,
+      "fibre": 1.0,
+      "fat": 0.36,
+      "kcal": 15.0,
+      "carbs": 2.69
+    }
+  },
+  "olive": {
+    "label": "Huile d’olive",
+    "family": "oil",
+    "group": "fat",
+    "photo": "huile",
+    "coefficient": 1.43,
+    "fdc": 171413,
+    "nutrients": {
+      "fat": 100.0,
+      "carbs": 0.0,
+      "kcal": 884.0,
+      "protein": 0.0,
+      "fibre": 0.0
+    }
+  },
+  "colza": {
+    "label": "Huile de colza",
+    "family": "oil",
+    "group": "fat",
+    "photo": "huile",
+    "coefficient": 1.04,
+    "fdc": 172336,
+    "nutrients": {
+      "fat": 100.0,
+      "protein": 0.0,
+      "carbs": 0.0,
+      "kcal": 884.0,
+      "fibre": 0.0
+    }
+  }
+}

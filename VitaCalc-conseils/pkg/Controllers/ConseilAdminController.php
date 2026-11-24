@@ -44,14 +44,14 @@ class ConseilAdminController extends AdminController
             $this->afficher($c, $erreurs);
             return;
         }
-        $c->save();
+        $id ? $c->modifier() : $c->ajouter();
         $this->redirect('conseils', $id ? 'Conseil modifié.' : 'Conseil ajouté.');
     }
 
     public function supprimer(): void
     {
         $this->exigerPost();
-        Conseil::delete((int) ($_POST['id'] ?? 0));
+        Conseil::supprimer((int) ($_POST['id'] ?? 0));
         $this->redirect('conseils', 'Conseil supprimé.');
     }
 

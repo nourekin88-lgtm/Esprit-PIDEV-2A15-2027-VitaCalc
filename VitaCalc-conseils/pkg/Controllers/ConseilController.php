@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../Models/CategorieConseil.php';
 require_once __DIR__ . '/../Models/Conseil.php';
+require_once __DIR__ . '/../Services/MoteurConseils.php';
 
 class ConseilController
 {
@@ -22,11 +23,24 @@ class ConseilController
 
     /**
      * @param array|null $profil Profil de l'utilisateur connecté, fourni par le module Utilisateur :
-     *                           ['age' => int, 'sexe' => string, 'poids' => float, 'taille' => float]
-     *                           Sans profil (visiteur), tous les conseils sont affichés de façon générale.
+     *                           ['age' => int, 'sexe' => string, 'poids' => float, 'taille' => float,
+     *                            'objectif_physique' => string]
+     *                           Le profil n'est jamais redemandé à l'utilisateur : il sert seulement à l'affichage
+     *                           (âge, sexe, poids, taille) et, s'il existe, « objectif_physique » évite la question de l'objectif.
+     *                           Sans profil (visiteur), le questionnaire permet quand même de personnaliser.
      */
     public function index(?array $profil = null)
     {
+        self::demarrerSession();
+        $profil ??= self::profilConnecte();
+
+        $selfUrl = '/' . ltrim((string) strtok($_SERVER['REQUEST_URI'] ?? '/', '?'), '/');
+
+        // Envoi du questionnaire (ou remise à zéro) : on traite, puis on redirige (évite le renvoi du formulaire).
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+            $this->traiterFormulaire($selfUrl, $profil);
+        }
+
         $categories = [];
         $erreur     = null;
 
@@ -56,8 +70,47 @@ class ConseilController
             $erreur = "Les conseils sont momentanément indisponibles. Vérifiez que MySQL est démarré et que la base « vitacalc » est importée.";
         }
 
-        // Conseils personnalisés : les catégories recommandées passent en premier.
-        $recommandes = self::recommandations($profil, array_keys($categories));
+        // Recherche : ?q=sommeil
+        $q = trim(mb_substr((string) ($_GET['q'] ?? ''), 0, 60));
+        $recherche = $q === '' ? null : ['q' => $q, 'resultats' => MoteurConseils::rechercher($q, $categories)];
+
+        // Recommandations : objectif du profil + réponses du questionnaire (gardées en session, pas en base).
+        $questionnaire  = $_SESSION['questionnaire'] ?? null;
+        $objectifProfil = MoteurConseils::objectifDepuisProfil($profil);
+        $cartes         = MoteurConseils::recommander($questionnaire, $objectifProfil, array_keys($categories));
+        $recommandes    = array_keys($cartes);
+
+        // Conseils mis en avant : un conseil (le premier) pour chacune des catégories recommandées.
+        $conseilsPerso = [];
+        foreach ($recommandes as $slug) {
+            $cat = $categories[$slug];
+            if (!$cat['conseils']) {
+                continue;
+            }
+            $conseilsPerso[] = [
+                'slug'    => $slug,
+                'label'   => $cat['label'],
+                'image'   => $cat['image'],
+                'titre'   => $cat['conseils'][0]['titre'],
+                'contenu' => $cat['conseils'][0]['contenu'],
+                'nb'      => count($cat['conseils']),
+            ];
+        }
+
+        // Résumé affiché au-dessus des conseils : réponses au questionnaire + profil (déjà connu, jamais redemandé).
+        $resume = [];
+        $objectif = $objectifProfil ?? ($questionnaire['objectif'] ?? null);
+        if ($objectif && isset(MoteurConseils::OBJECTIFS[$objectif]) && $objectif !== 'aucun') {
+            $resume[] = MoteurConseils::OBJECTIFS[$objectif];
+        }
+        if ($questionnaire) {
+            $resume[] = 'Priorité : ' . MoteurConseils::ASPECTS[$questionnaire['aspect']];
+            $resume[] = 'Sommeil : ' . mb_strtolower(MoteurConseils::NIVEAUX_SOMMEIL[$questionnaire['sommeil']], 'UTF-8');
+            $resume[] = 'Stress : '  . mb_strtolower(MoteurConseils::NIVEAUX_STRESS[$questionnaire['stress']], 'UTF-8');
+        }
+        $resumeProfil = self::resumeProfil($profil);
+
+        // Les catégories recommandées passent en premier dans les onglets.
         if ($recommandes) {
             $ordre = array_merge($recommandes, array_diff(array_keys($categories), $recommandes));
             $tri   = [];
@@ -66,6 +119,11 @@ class ConseilController
             }
             $categories = $tri;
         }
+
+        // Etat du formulaire : ouvert après une erreur ou via « Modifier mes réponses ».
+        $erreurFormulaire = !empty($_SESSION['questionnaire_erreur']);
+        unset($_SESSION['questionnaire_erreur']);
+        $ouvrirFormulaire = $erreurFormulaire || isset($_GET['modifier']);
 
         $documentRoot = isset($_SERVER['DOCUMENT_ROOT'])
             ? str_replace('\\', '/', realpath($_SERVER['DOCUMENT_ROOT']))
@@ -87,44 +145,76 @@ class ConseilController
         require_once __DIR__ . '/../Views/FrontOffice/conseil.php';
     }
 
-    /**
-     * Choisit jusqu'à 3 catégories à mettre en avant d'après l'âge, le poids et la taille.
-     * Ces valeurs ne sont ni affichées ni enregistrées : elles servent uniquement à ordonner les onglets.
-     * Le sexe n'est volontairement pas utilisé : les conseils proposés valent pour tout le monde.
-     */
-    private static function recommandations(?array $profil, array $existantes): array
+    /** Enregistre (ou efface) les réponses du questionnaire en session, puis redirige. */
+    private function traiterFormulaire(string $selfUrl, ?array $profil): void
+    {
+        $action = $_POST['action'] ?? '';
+
+        if ($action === 'questionnaire') {
+            $reponses = MoteurConseils::validerReponses($_POST, MoteurConseils::objectifDepuisProfil($profil) !== null);
+            if ($reponses === null) {
+                $_SESSION['questionnaire_erreur'] = true;
+                self::rediriger($selfUrl . '#personnaliser');
+            }
+            $_SESSION['questionnaire'] = $reponses;
+            self::rediriger($selfUrl . '#recommandations');
+        }
+
+        if ($action === 'reinitialiser') {
+            unset($_SESSION['questionnaire']);
+            self::rediriger($selfUrl . '#personnaliser');
+        }
+
+        self::rediriger($selfUrl);
+    }
+
+    private static function rediriger(string $url): void
+    {
+        header('Location: ' . $url);
+        exit;
+    }
+
+    /** Informations du profil à afficher, ex. ['25 ans', 'Homme', '66 kg', '185 cm']. */
+    private static function resumeProfil(?array $profil): array
     {
         if (!$profil) {
             return [];
         }
-        $reco = [];
-
-        $age = isset($profil['age']) ? (int) $profil['age'] : 0;
-        if ($age > 0 && $age < 25) {
-            array_push($reco, 'sommeil', 'bien-etre-numerique');
-        } elseif ($age >= 25 && $age < 50) {
-            array_push($reco, 'gestion-du-stress', 'posture-et-ergonomie');
-        } elseif ($age >= 50) {
-            array_push($reco, 'recuperation', 'sport');
+        $r = [];
+        $age = (int) ($profil['age'] ?? 0);
+        if ($age > 0) {
+            $r[] = $age . ' ans';
         }
-
-        $poids  = (float) ($profil['poids'] ?? 0);
+        $sexe = trim((string) ($profil['sexe'] ?? ''));
+        if ($sexe !== '') {
+            $r[] = mb_convert_case(mb_strtolower($sexe, 'UTF-8'), MB_CASE_TITLE, 'UTF-8');
+        }
+        $poids = (float) ($profil['poids'] ?? 0);
+        if ($poids > 0) {
+            $r[] = rtrim(rtrim(number_format($poids, 1, ',', ''), '0'), ',') . ' kg';
+        }
         $taille = (float) ($profil['taille'] ?? 0);
-        if ($taille > 3) {          // taille en centimètres -> mètres
-            $taille /= 100;
+        if ($taille > 0) {
+            $r[] = round($taille <= 3 ? $taille * 100 : $taille) . ' cm';   // mètres ou centimètres
         }
-        if ($poids > 0 && $taille > 0.5) {
-            $imc = $poids / ($taille * $taille);
-            if ($imc < 18.5) {
-                $reco[] = 'nutrition';
-            } elseif ($imc >= 25) {
-                array_push($reco, 'sport', 'nutrition');
-            } else {
-                $reco[] = 'hydratation';
-            }
-        }
+        return $r;
+    }
 
-        return array_slice(array_values(array_unique(array_intersect($reco, $existantes))), 0, 3);
+    private static function demarrerSession(): void
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+    }
+
+    /**
+     * Profil de l'utilisateur connecté. A adapter à l'intégration avec le module Utilisateur :
+     * ici on suppose que ce module le place dans $_SESSION['profil'] (sinon : visiteur, null).
+     */
+    private static function profilConnecte(): ?array
+    {
+        $profil = $_SESSION['profil'] ?? null;
+        return is_array($profil) ? $profil : null;
     }
 
     private static function slug(string $nom): string

@@ -45,20 +45,35 @@ class Conseil
         return $r ? self::fromRow($r) : null;
     }
 
-    /** Ajoute le conseil, ou le modifie s'il a déjà un id. */
+        // C : Create
+    public function ajouter(): void
+    {
+        $db = Database::getConnection();
+        $db->prepare('INSERT INTO conseil (titre, contenu, date_publication, id_categorie) VALUES (?, ?, ?, ?)')
+           ->execute([$this->titre, $this->contenu, $this->datePublication ?: date('Y-m-d'), $this->idCategorie]);
+        $this->id = (int) $db->lastInsertId();
+    }
+
+    // U : Update
+    public function modifier(): void
+    {
+        Database::getConnection()
+            ->prepare('UPDATE conseil SET titre = ?, contenu = ?, date_publication = ?, id_categorie = ? WHERE id = ?')
+            ->execute([$this->titre, $this->contenu, $this->datePublication ?: date('Y-m-d'), $this->idCategorie, $this->id]);
+    }
+
+    /** Ajoute ou modifie selon que le conseil a déjà un id. */
     public function save(): void
     {
-        $db   = Database::getConnection();
-        $date = $this->datePublication ?: date('Y-m-d');
-        if ($this->id === null) {
-            $db->prepare('INSERT INTO conseil (titre, contenu, date_publication, id_categorie) VALUES (?, ?, ?, ?)')
-               ->execute([$this->titre, $this->contenu, $date, $this->idCategorie]);
-            $this->id = (int) $db->lastInsertId();
-        } else {
-            $db->prepare('UPDATE conseil SET titre = ?, contenu = ?, date_publication = ?, id_categorie = ? WHERE id = ?')
-               ->execute([$this->titre, $this->contenu, $date, $this->idCategorie, $this->id]);
-        }
+        $this->id === null ? $this->ajouter() : $this->modifier();
     }
+
+    // R : Read
+    public static function lister(): array { return self::all(); }
+    public static function consulter(int $id): ?self { return self::find($id); }
+
+    // D : Delete
+    public static function supprimer(int $id): void { self::delete($id); }
 
     public static function delete(int $id): void
     {

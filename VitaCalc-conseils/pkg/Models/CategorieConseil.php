@@ -26,19 +26,35 @@ class CategorieConseil
         return $r ? new self((int) $r['id'], $r['nom'], $r['description']) : null;
     }
 
-    /** Ajoute la catégorie, ou la modifie si elle a déjà un id. */
-    public function save(): void
+        // C : Create
+    public function ajouter(): void
     {
         $db = Database::getConnection();
-        if ($this->id === null) {
-            $db->prepare('INSERT INTO categorie_conseil (nom, description) VALUES (?, ?)')
-               ->execute([$this->nom, $this->description]);
-            $this->id = (int) $db->lastInsertId();
-        } else {
-            $db->prepare('UPDATE categorie_conseil SET nom = ?, description = ? WHERE id = ?')
-               ->execute([$this->nom, $this->description, $this->id]);
-        }
+        $db->prepare('INSERT INTO categorie_conseil (nom, description) VALUES (?, ?)')
+           ->execute([$this->nom, $this->description]);
+        $this->id = (int) $db->lastInsertId();
     }
+
+    // U : Update
+    public function modifier(): void
+    {
+        Database::getConnection()
+            ->prepare('UPDATE categorie_conseil SET nom = ?, description = ? WHERE id = ?')
+            ->execute([$this->nom, $this->description, $this->id]);
+    }
+
+    /** Ajoute ou modifie selon que la catégorie a déjà un id. */
+    public function save(): void
+    {
+        $this->id === null ? $this->ajouter() : $this->modifier();
+    }
+
+    // R : Read
+    public static function lister(): array { return self::all(); }
+    public static function consulter(int $id): ?self { return self::find($id); }
+
+    // D : Delete
+    public static function supprimer(int $id): void { self::delete($id); }
 
     /** Refusé par la base si la catégorie contient encore des conseils (ON DELETE RESTRICT). */
     public static function delete(int $id): void

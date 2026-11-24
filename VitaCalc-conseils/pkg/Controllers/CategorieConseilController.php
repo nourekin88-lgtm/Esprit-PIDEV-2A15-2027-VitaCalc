@@ -31,7 +31,7 @@ class CategorieConseilController extends AdminController
         if ($cat->nom === '' || self::longueur($cat->nom) > 100) { $erreurs['nom'] = 'Le nom est obligatoire (100 caractères maximum).'; }
         if (!$erreurs) {
             try {
-                $cat->save();
+                $id ? $cat->modifier() : $cat->ajouter();
             } catch (PDOException $e) {
                 if ((int) ($e->errorInfo[1] ?? 0) !== 1062) { throw $e; }
                 $erreurs['nom'] = 'Une catégorie porte déjà ce nom.';
@@ -52,7 +52,7 @@ class CategorieConseilController extends AdminController
         if ($nb > 0) {
             $this->redirect('categories', "Suppression impossible : cette catégorie contient $nb conseil(s). Supprimez-les ou changez leur catégorie d’abord.", 'error');
         }
-        CategorieConseil::delete($id);
+        CategorieConseil::supprimer($id);
         $this->redirect('categories', 'Catégorie supprimée.');
     }
 

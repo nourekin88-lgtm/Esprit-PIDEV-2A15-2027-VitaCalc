@@ -1,0 +1,293 @@
+/* VitaCalc — effets d'interaction communs (site + back-office)
+   Uniquement des transitions douces (0,2 à 0,4 s). Aucune modification de mise en page. */
+
+:root {
+    --fx-ease: cubic-bezier(.22, .61, .36, 1);
+    --fx-bounce: cubic-bezier(.34, 1.56, .64, 1);
+    --fx-shadow: 0 14px 30px #193c2d24;
+}
+
+/* ---------- Liens et navigation : soulignement animé ---------- */
+.navlinks > a:not(.userdot),
+.nav-event > button {
+    position: relative;
+    transition: color .25s var(--fx-ease);
+}
+.navlinks > a:not(.userdot)::after,
+.nav-event > button::before {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: 4px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--green);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .3s var(--fx-ease);
+    pointer-events: none;
+}
+.navlinks > a:not(.userdot):hover::after,
+.navlinks > a.active:not(.userdot)::after,
+.nav-event > button:hover::before,
+.nav-event > button[aria-expanded="true"]::before {
+    transform: scaleX(1);
+}
+.userdot { transition: transform .3s var(--fx-bounce), box-shadow .3s var(--fx-ease); }
+.userdot:hover { transform: scale(1.1) rotate(-4deg); box-shadow: 0 6px 14px #073c2a33; }
+
+.dropdown a { transition: background .2s, color .2s, padding-left .25s var(--fx-ease); }
+.dropdown a:hover { padding-left: 22px; }
+.dropdown a span { display: inline-block; transition: transform .25s var(--fx-bounce); }
+.dropdown a:hover span { transform: scale(1.25) rotate(8deg); }
+
+.event-title-link, .event-official-link, .crumb a, .footer a {
+    transition: color .2s, letter-spacing .25s var(--fx-ease);
+}
+.event-official-link:hover { letter-spacing: .2px; }
+
+.backarrow, .detail-back { transition: background .2s, color .2s, transform .25s var(--fx-ease); }
+.backarrow:hover { transform: translateX(-3px); }
+.backarrow span[aria-hidden] { display: inline-block; transition: transform .25s var(--fx-ease); }
+.backarrow:hover span[aria-hidden] { transform: translateX(-4px); }
+
+/* ---------- Boutons : montée, brillance, pression ---------- */
+.btn, .btn-outline, .primary, .export, .link-button, .btn-waitlist {
+    position: relative;
+    overflow: hidden;
+    transition: background .25s var(--fx-ease), color .25s var(--fx-ease),
+                border-color .25s var(--fx-ease), transform .25s var(--fx-ease),
+                box-shadow .25s var(--fx-ease);
+}
+.btn::after, .primary::after, .btn-waitlist::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -75%;
+    width: 50%; height: 100%;
+    background: linear-gradient(100deg, transparent, #ffffff55, transparent);
+    transform: skewX(-20deg);
+    pointer-events: none;
+}
+.btn:hover::after, .primary:hover::after, .btn-waitlist:hover::after {
+    left: 130%;
+    transition: left .6s var(--fx-ease);
+}
+.btn:hover, .primary:hover, .btn-waitlist:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px #0a7a3a33;
+}
+.btn-outline:hover { transform: translateY(-2px); box-shadow: 0 6px 14px #193c2d1a; }
+.btn:active, .btn-outline:active, .primary:active, .export:active, .btn-waitlist:active, .link-button:active {
+    transform: translateY(0) scale(.97);
+    box-shadow: none;
+    transition-duration: .08s;
+}
+.btn-disabled, .btn:disabled, .primary:disabled { transform: none !important; box-shadow: none !important; }
+.btn-disabled::after { display: none; }
+
+/* Flèche → qui se décale (texte du bouton) */
+.btn, .link-button { white-space: nowrap; }
+.tile-arrow { display: inline-block; transition: transform .3s var(--fx-ease); }
+.tile:hover .tile-arrow { transform: translateX(6px); }
+
+/* ---------- Cartes d'événements ---------- */
+/* L'animation « reveal » gardait le transform final et bloquait le survol : on libère le transform après l'entrée */
+.eventcard.reveal { animation-fill-mode: backwards; }
+.eventcard {
+    transition: transform .3s var(--fx-ease), box-shadow .3s var(--fx-ease), border-color .3s;
+    will-change: transform;
+}
+.eventcard:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--fx-shadow);
+    border-color: #cfe3d6;
+}
+/* Zoom doux de la photo (la carte masque le débordement) */
+.eventphoto { transition: transform .5s var(--fx-ease); transform-origin: center; z-index: 0; }
+.eventcard:hover .eventphoto { transform: scale(1.06); }
+.eventbody { position: relative; z-index: 1; background: #fff; }
+.datebadge, .categorytag { transition: transform .3s var(--fx-bounce); }
+.eventcard:hover .datebadge { transform: translateY(-2px) scale(1.05); }
+.eventcard:hover .categorytag { transform: translateY(-2px); }
+
+/* Cœur ♡ */
+.fav-btn { transition: transform .3s var(--fx-bounce), color .2s, background .2s, box-shadow .25s; }
+.eventcard:hover .fav-btn { transform: scale(1.12); }
+.fav-btn:hover { transform: scale(1.3) !important; box-shadow: 0 4px 12px #d9488340; }
+.fav-btn:active { transform: scale(.9) !important; }
+.fav-detail .fav-heart { display: inline-block; transition: transform .3s var(--fx-bounce); }
+.fav-detail:hover .fav-heart { transform: scale(1.35); }
+.fav-detail { transition: background .2s, transform .25s var(--fx-ease); }
+.fav-detail:active { transform: scale(.96); }
+
+/* Tuiles de la page d'accueil */
+.tile { transition: transform .3s var(--fx-ease), box-shadow .3s var(--fx-ease), border-color .3s; }
+.tile:hover { transform: translateY(-6px); box-shadow: var(--fx-shadow); }
+.tile-icon { transition: transform .35s var(--fx-bounce); }
+.tile:hover .tile-icon { transform: scale(1.12) rotate(-6deg); }
+
+/* ---------- Pastilles de catégories et filtres ---------- */
+.pill, .pill-fav, .map-zone-button {
+    transition: background .2s, color .2s, border-color .2s,
+                transform .3s var(--fx-bounce), box-shadow .25s;
+}
+.pill:hover, .pill-fav:hover, .map-zone-button:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 6px 12px #193c2d1a; }
+.pill:active, .pill-fav:active, .map-zone-button:active { transform: scale(.95); transition-duration: .08s; }
+.pill.active { animation: fxPop .35s var(--fx-bounce); }
+.stat { transition: transform .3s var(--fx-ease), box-shadow .3s var(--fx-ease); }
+.stat:hover { transform: translateY(-3px); }
+#filtersButton, .btn-outline#filtersButton { transition: transform .25s var(--fx-ease), background .2s, color .2s; }
+.filterpanel.show { animation: fxDrop .3s var(--fx-ease); }
+
+/* ---------- Page détail ---------- */
+.detail-meta-item, .detail-info-card, .capacity-card, .detail-card, .waitlist-box {
+    transition: transform .3s var(--fx-ease), box-shadow .3s var(--fx-ease), border-color .3s, background .3s;
+}
+.detail-meta-item:hover { transform: translateY(-3px); box-shadow: 0 8px 18px #193c2d14; }
+.detail-meta-icon { display: inline-flex; transition: transform .35s var(--fx-bounce); }
+.detail-meta-item:hover .detail-meta-icon { transform: scale(1.15) rotate(-6deg); }
+.capacity-card:hover, .detail-info-card:hover, .waitlist-box:hover { transform: translateY(-3px); box-shadow: var(--fx-shadow); }
+.detail-info-list li { transition: background .2s, padding-left .25s var(--fx-ease); }
+.detail-info-list li:hover { padding-left: 6px; }
+.detail-img { transition: transform .6s var(--fx-ease); }
+.detail-hero { overflow: hidden; }
+.detail-hero:hover .detail-img { transform: scale(1.04); }
+.capacity-bar { transition: width 1s var(--fx-ease); position: relative; overflow: hidden; }
+.capacity-bar::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, transparent, #ffffff66, transparent);
+    transform: translateX(-100%);
+    animation: fxShine 2.8s ease-in-out 1.2s infinite;
+}
+
+/* ---------- Formulaires ---------- */
+.field input, .field select, .field textarea,
+.search, .admin-search, .admin-field input, .admin-field select, .admin-field textarea,
+.table-tools select {
+    transition: border-color .25s var(--fx-ease), box-shadow .25s var(--fx-ease), background .25s, transform .25s var(--fx-ease);
+}
+.field input:focus, .field select:focus, .field textarea:focus,
+.admin-field input:focus, .admin-field select:focus, .admin-field textarea:focus {
+    border-color: var(--green);
+    box-shadow: 0 0 0 4px #12b95626;
+    background: #fff;
+    outline: none;
+}
+.search:focus-within, .admin-search:focus-within {
+    border-color: var(--green);
+    box-shadow: 0 0 0 4px #12b95626;
+    transform: translateY(-1px);
+}
+.field label, .admin-field label { transition: color .2s; }
+.field:focus-within > label, .admin-field:focus-within > label { color: var(--green); }
+.consent { transition: color .2s; }
+.consent:hover { color: var(--deep); }
+.formcard { transition: box-shadow .3s var(--fx-ease); }
+.formcard:hover { box-shadow: 0 14px 34px #193c2d14; }
+.success.show, .notice.show { animation: fxDrop .4s var(--fx-bounce); }
+.signup-photo { overflow: hidden; }
+
+/* ---------- Carte Leaflet et zones ---------- */
+/* Leaflet positionne l'icône avec un transform : on anime donc l'élément intérieur */
+.vitacalc-map-marker { transition: transform .3s var(--fx-bounce), box-shadow .25s, background .2s; }
+.vitacalc-map-marker-wrap:hover { z-index: 1000 !important; }
+.vitacalc-map-marker-wrap:hover .vitacalc-map-marker { transform: scale(1.22); box-shadow: 0 8px 18px #12432966; background: #09923c; }
+.leaflet-popup-content-wrapper { animation: fxPop .3s var(--fx-bounce); }
+.map-zone-list .map-zone-button { transition: background .2s, color .2s, transform .3s var(--fx-ease), box-shadow .25s; }
+.map-zone-list .map-zone-button:hover { transform: translateX(5px) scale(1.01); }
+.map-popup-event { transition: background .2s; }
+.map-popup-event:hover { background: #f2f8f4; }
+.map-popup-links a { transition: transform .25s var(--fx-ease), background .2s, color .2s; }
+.map-popup-links a:hover { transform: translateY(-2px); }
+.eventcard:target { animation: fxHighlight 1.6s var(--fx-ease); }
+.event-map { transition: box-shadow .3s var(--fx-ease); }
+.event-map:hover { box-shadow: var(--fx-shadow); }
+
+/* ---------- Apparition progressive au défilement (JS ajoute .fx-ready) ---------- */
+.fx-ready .fx-reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity .5s var(--fx-ease), transform .5s var(--fx-ease);
+    transition-delay: var(--fx-delay, 0ms);
+}
+.fx-ready .fx-reveal.fx-in { opacity: 1; transform: none; }
+/* Une fois apparu, on rend la main aux effets de survol */
+.fx-ready .tile.fx-reveal.fx-in {
+    transition: transform .3s var(--fx-ease), box-shadow .3s var(--fx-ease), border-color .3s, opacity .5s;
+    transition-delay: 0ms;
+}
+
+/* ---------- Back-office ---------- */
+tbody tr { transition: background .2s var(--fx-ease), box-shadow .2s; }
+tbody tr:hover { background: #eef8f2; box-shadow: inset 3px 0 0 var(--green); }
+tbody tr:hover .table-event img { transform: scale(1.08); }
+.table-event img, .event-thumb { transition: transform .3s var(--fx-ease); }
+.upcoming-item { transition: background .2s, transform .25s var(--fx-ease); border-radius: 8px; }
+.upcoming-item:hover { background: #f2f8f4; transform: translateX(4px); }
+.upcoming-item:hover .event-thumb { transform: scale(1.08); }
+
+.metric, .panel, .quick-action, .tip {
+    transition: transform .3s var(--fx-ease), box-shadow .3s var(--fx-ease), border-color .3s, background .25s;
+}
+.metric:hover { transform: translateY(-4px); box-shadow: var(--fx-shadow); }
+.metric-ico { transition: transform .35s var(--fx-bounce); }
+.metric:hover .metric-ico { transform: scale(1.15) rotate(-6deg); }
+.panel:hover { box-shadow: 0 10px 24px #193c2d12; }
+.quick-action:hover { transform: translateY(-3px) translateX(2px); box-shadow: 0 10px 22px #193c2d1c; }
+.quick-icon { transition: transform .35s var(--fx-bounce); }
+.quick-action:hover .quick-icon { transform: scale(1.12) rotate(-6deg); }
+.tip:hover { transform: translateY(-2px); }
+
+.side-link { transition: background .2s, color .2s, transform .25s var(--fx-ease), padding-left .25s var(--fx-ease); }
+.side-link:hover { transform: translateX(4px); }
+.side-link span { display: inline-block; transition: transform .3s var(--fx-bounce); }
+.side-link:hover span { transform: scale(1.2) rotate(-6deg); }
+.side-link i { transition: transform .3s var(--fx-bounce); }
+.side-link:hover i { transform: scale(1.12); }
+.back-home { transition: transform .25s var(--fx-ease), color .2s; display: inline-block; }
+.back-home:hover { transform: translateX(4px); }
+.admin-profile { transition: background .2s, transform .25s var(--fx-ease); }
+.admin-profile:hover { transform: translateY(-2px); }
+.notif, .hamb { transition: transform .3s var(--fx-bounce); }
+.notif:hover, .hamb:hover { transform: scale(1.12); }
+
+.row-actions button { transition: background .2s, color .2s, transform .25s var(--fx-bounce), box-shadow .2s; }
+.row-actions button:hover:not(:disabled) { transform: translateY(-2px) scale(1.08); box-shadow: 0 4px 10px #193c2d1f; }
+.row-actions button:active:not(:disabled) { transform: scale(.94); transition-duration: .08s; }
+.pill-status, .badge-cat, .pos-chip { transition: transform .25s var(--fx-bounce); }
+tr:hover .pill-status, tr:hover .badge-cat, tr:hover .pos-chip { transform: scale(1.06); }
+
+.view.active { animation: fxView .4s var(--fx-ease); }
+.shade.show, .modalshade.show { animation: fxFade .25s ease; }
+.admin-modal, .modal { animation: fxPop .35s var(--fx-bounce); }
+.xclose, .close { transition: transform .3s var(--fx-ease), background .2s; }
+.xclose:hover, .close:hover { transform: rotate(90deg); }
+.img-dropzone { transition: background .2s, border-color .2s, transform .25s var(--fx-ease), box-shadow .25s; }
+.img-dropzone:hover { transform: translateY(-2px); box-shadow: 0 8px 18px #193c2d14; }
+
+/* ---------- Mots-clés d'animation ---------- */
+@keyframes fxPop { 0% { transform: scale(.94); opacity: .6 } 60% { transform: scale(1.04) } 100% { transform: scale(1); opacity: 1 } }
+@keyframes fxDrop { from { opacity: 0; transform: translateY(-8px) } to { opacity: 1; transform: none } }
+@keyframes fxFade { from { opacity: 0 } to { opacity: 1 } }
+@keyframes fxView { from { opacity: 0; transform: translateY(10px) } to { opacity: 1; transform: none } }
+@keyframes fxShine { 0% { transform: translateX(-100%) } 60%, 100% { transform: translateX(100%) } }
+@keyframes fxHighlight { 0%, 100% { box-shadow: 0 4px 16px #193c2d0c } 30% { box-shadow: 0 0 0 4px #12b95655, 0 12px 28px #193c2d22 } }
+
+/* Pas de survol « collant » sur les écrans tactiles */
+@media (hover: none) {
+    .eventcard:hover, .tile:hover, .metric:hover, .quick-action:hover, .pill:hover, .btn:hover { transform: none; }
+}
+
+/* ---------- Réglage système « réduire les animations » ---------- */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+        transition-delay: 0ms !important;
+        scroll-behavior: auto !important;
+    }
+    .fx-ready .fx-reveal { opacity: 1; transform: none; }
+    .eventcard:hover, .tile:hover, .metric:hover, .quick-action:hover,
+    .pill:hover, .btn:hover, .fav-btn:hover { transform: none !important; }
+}

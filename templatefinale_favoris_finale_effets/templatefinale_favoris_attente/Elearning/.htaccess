@@ -1,0 +1,22 @@
+Options -Indexes
+DirectoryIndex index.php
+<IfModule mod_authz_core.c>
+    <FilesMatch "^(events|registrations)\.json$">
+        Require all denied
+    </FilesMatch>
+</IfModule>
+<IfModule !mod_authz_core.c>
+    <FilesMatch "^(events|registrations)\.json$">
+        Order allow,deny
+        Deny from all
+    </FilesMatch>
+</IfModule>
+
+# Toutes les pages du site passent par le routeur MVC PHP.
+
+# Compatibilité : anciennes valeurs d'images stockées en base (img/events/...)
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} !-f
+    RewriteRule ^img/(.*)$ Views/assets/img/$1 [L]
+</IfModule>

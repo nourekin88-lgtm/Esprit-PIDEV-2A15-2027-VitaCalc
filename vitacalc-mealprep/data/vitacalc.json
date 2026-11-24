@@ -1,0 +1,705 @@
+{
+    "next": {
+        "utilisateur": 5,
+        "recette": 13,
+        "ingredient": 32
+    },
+    "utilisateurs": [
+        {
+            "id": 1,
+            "nom": "VitaCalc",
+            "prenom": "Admin",
+            "email": "admin@vitacalc.tn",
+            "motDePasseHash": "$2y$10$dyIjSOcmGiczEAoAvEZdTuZOaD9GHQKGmSReMdj0yScchMn6Rotga",
+            "telephone": "+216 71 000 000",
+            "role": "ADMIN",
+            "dateInscription": "2026-11-24"
+        },
+        {
+            "id": 2,
+            "nom": "Ben Salah",
+            "prenom": "Sara",
+            "email": "client@vitacalc.tn",
+            "motDePasseHash": "$2y$10$CCxNU7a5oiIuetNOc2jUr.tNCKoO3S6TBoLP7hBTmSrToHNTDXUtW",
+            "telephone": "+216 20 123 456",
+            "role": "CLIENT",
+            "dateInscription": "2026-11-24"
+        },
+        {
+            "id": 3,
+            "nom": "yahmadi",
+            "prenom": "tasnim",
+            "email": "yahmaditasnim3@gmail.com",
+            "motDePasseHash": "$2y$10$RpT4VeOFcX0a8k0T5A6giu3tfGwSK4VsYORO8N.gvrbHRLl2otFC.",
+            "telephone": "92016952",
+            "role": "CLIENT",
+            "dateInscription": "2026-11-24"
+        },
+        {
+            "id": 4,
+            "nom": "YAHMADI",
+            "prenom": "TASNIM",
+            "email": "tasnim@admin.tn",
+            "motDePasseHash": "$2y$10$AnliYCGjnlDiNjzyq2qeCuzQHMZqmO3JHyZ25oG7G1YDyOofFFL5O",
+            "telephone": "92016952",
+            "role": "CLIENT",
+            "dateInscription": "2026-11-24"
+        }
+    ],
+    "ingredients": [
+        {
+            "id": 1,
+            "nom": "Quinoa",
+            "image": "assets\/uploads\/img_5598488b0a825c44.jpg"
+        },
+        {
+            "id": 2,
+            "nom": "Blanc de poulet",
+            "image": "assets\/uploads\/img_4bff569961bf6a02.jpg"
+        },
+        {
+            "id": 3,
+            "nom": "Brocoli",
+            "image": "assets\/uploads\/img_23b3d5021854ea40.jpg"
+        },
+        {
+            "id": 4,
+            "nom": "Huile d'olive",
+            "image": "assets\/uploads\/img_757e1d565c4428d9.jpg"
+        },
+        {
+            "id": 5,
+            "nom": "Flocons d'avoine",
+            "image": "assets\/uploads\/img_67eb3887d33a0fe6.jpg"
+        },
+        {
+            "id": 6,
+            "nom": "Lait",
+            "image": "assets\/uploads\/img_911ac4f89d12897c.jpg"
+        },
+        {
+            "id": 7,
+            "nom": "Banane",
+            "image": "assets\/uploads\/img_aa402d13da586070.jpg"
+        },
+        {
+            "id": 8,
+            "nom": "Avocat",
+            "image": "assets\/uploads\/img_e4bbf5c933067ca8.webp"
+        },
+        {
+            "id": 9,
+            "nom": "Tomate",
+            "image": "assets\/uploads\/img_8a34d581a949fbee.jpg"
+        },
+        {
+            "id": 10,
+            "nom": "Concombre",
+            "image": "assets\/uploads\/img_e4fffbfb35eaf426.jpg"
+        },
+        {
+            "id": 11,
+            "nom": "Citron",
+            "image": "assets\/uploads\/img_216a304f827fdd51.jpg"
+        },
+        {
+            "id": 12,
+            "nom": "Saumon",
+            "image": "assets\/uploads\/img_e4dae48ff28eb5a2.jpg"
+        },
+        {
+            "id": 13,
+            "nom": "Riz",
+            "image": "assets\/uploads\/img_3dc561ab3cc457aa.jpg"
+        },
+        {
+            "id": 14,
+            "nom": "Oeufs",
+            "image": "assets\/uploads\/img_8c4f0ae3c6a8ae5f.jpg"
+        },
+        {
+            "id": 15,
+            "nom": "Épinards",
+            "image": "assets\/uploads\/img_f299544dcaf59c7f.jpg"
+        },
+        {
+            "id": 16,
+            "nom": "Fromage",
+            "image": "assets\/uploads\/img_3246d232f6fbcc61.jpg"
+        },
+        {
+            "id": 17,
+            "nom": "Sel",
+            "image": "assets\/uploads\/img_911be1de6d373f1e.jpg"
+        },
+        {
+            "id": 18,
+            "nom": "Fraise",
+            "image": "assets\/uploads\/img_3751325b0cdc1169.jpg"
+        },
+        {
+            "id": 19,
+            "nom": "Yaourt",
+            "image": "assets\/uploads\/img_47bf180bcce64c36.webp"
+        },
+        {
+            "id": 20,
+            "nom": "Miel",
+            "image": "assets\/uploads\/img_ae95c33535150322.jpg"
+        },
+        {
+            "id": 21,
+            "nom": "Tortilla complète",
+            "image": "assets\/uploads\/img_875cfc85f42525b1.jpg"
+        },
+        {
+            "id": 22,
+            "nom": "Laitue",
+            "image": "assets\/uploads\/img_d705e0ef88118a27.jpg"
+        },
+        {
+            "id": 23,
+            "nom": "Lentilles",
+            "image": "assets\/uploads\/img_ef3f1f1a69b2cff2.jpg"
+        },
+        {
+            "id": 24,
+            "nom": "Carotte",
+            "image": "assets\/uploads\/img_f463cde8d8dd4f79.jpg"
+        },
+        {
+            "id": 25,
+            "nom": "Oignon",
+            "image": "assets\/uploads\/img_20a130b2ce1ae565.jpg"
+        },
+        {
+            "id": 26,
+            "nom": "Ail",
+            "image": "assets\/uploads\/img_4312b55044734179.jpg"
+        },
+        {
+            "id": 27,
+            "nom": "Pâtes complètes",
+            "image": "assets\/uploads\/img_862ee0453b077320.jpg"
+        },
+        {
+            "id": 28,
+            "nom": "Courgette",
+            "image": "assets\/uploads\/img_0a6924a4da50d636.jpg"
+        },
+        {
+            "id": 29,
+            "nom": "Pois chiches",
+            "image": "assets\/uploads\/img_28e4341f41e74fab.jpg"
+        },
+        {
+            "id": 30,
+            "nom": "Graines de chia",
+            "image": "assets\/uploads\/img_3d335c495e8f4a0f.jpg"
+        },
+        {
+            "id": 31,
+            "nom": "Patate douce",
+            "image": "assets\/uploads\/img_888797bce793d5ae.jpg"
+        }
+    ],
+    "recettes": [
+        {
+            "id": 1,
+            "nom": "Bowl poulet & quinoa",
+            "description": "Un bowl protéiné et équilibré, parfait pour le déjeuner de la semaine.",
+            "instructions": "Cuire le quinoa.\nGriller le poulet assaisonné.\nDécouper les légumes.\nAssembler dans des boîtes et conserver au frais.",
+            "tempsPreparation": 35,
+            "nombrePortions": 4,
+            "image": "assets\/images\/recettes\/bowl-poulet-quinoa.jpg",
+            "moment": "dejeuner"
+        },
+        {
+            "id": 2,
+            "nom": "Overnight oats banane",
+            "description": "Petit-déjeuner prêt la veille, riche en fibres et sans cuisson.",
+            "instructions": "Mélanger les flocons d'avoine et le lait.\r\nAjouter la banane écrasée.\r\nLaisser reposer une nuit au réfrigérateur.",
+            "tempsPreparation": 10,
+            "nombrePortions": 2,
+            "image": "assets\/uploads\/img_39edc78282fe9c0f.webp",
+            "moment": "matin"
+        },
+        {
+            "id": 3,
+            "nom": "Salade quinoa avocat",
+            "description": "Une salade fraîche et rassasiante, pleine de bons gras.",
+            "instructions": "Cuire le quinoa et le laisser refroidir.\r\nCouper l'avocat, la tomate et le concombre en dés.\r\nMélanger avec le quinoa.\r\nAssaisonner avec l'huile d'olive et le jus de citron.",
+            "tempsPreparation": 20,
+            "nombrePortions": 3,
+            "image": "assets\/uploads\/img_99d0b5c53c5a9dff.jpg",
+            "moment": "dejeuner"
+        },
+        {
+            "id": 4,
+            "nom": "Saumon grillé & brocoli",
+            "description": "Riche en oméga-3 : un dîner léger et plein de saveurs.",
+            "instructions": "Cuire le riz.\r\nMariner le saumon avec le citron et l'huile d'olive.\r\nGriller le saumon 4 minutes de chaque côté.\r\nCuire le brocoli à la vapeur et servir ensemble.",
+            "tempsPreparation": 30,
+            "nombrePortions": 4,
+            "image": "assets\/uploads\/img_c42c7a1601cb5aa5.jpg",
+            "moment": "diner"
+        },
+        {
+            "id": 5,
+            "nom": "Omelette aux épinards",
+            "description": "Une omelette moelleuse, riche en protéines et en fer.",
+            "instructions": "Battre les œufs avec une pincée de sel.\r\nFaire revenir les épinards dans l'huile d'olive.\r\nVerser les œufs, ajouter le fromage.\r\nCuire à feu doux puis plier l'omelette.",
+            "tempsPreparation": 15,
+            "nombrePortions": 2,
+            "image": "assets\/uploads\/img_e915b1811035bc9a.jpg",
+            "moment": "matin"
+        },
+        {
+            "id": 6,
+            "nom": "Smoothie bowl fraise-banane",
+            "description": "Un petit-déjeuner coloré, frais et plein de vitamines.",
+            "instructions": "Mixer la banane, les fraises et le yaourt.\r\nVerser dans un bol.\r\nAjouter les flocons d'avoine et un filet de miel.",
+            "tempsPreparation": 10,
+            "nombrePortions": 2,
+            "image": "assets\/uploads\/img_9c9b8d1413942d1f.jpg",
+            "moment": "matin"
+        },
+        {
+            "id": 7,
+            "nom": "Wrap poulet & légumes croquants",
+            "description": "Un déjeuner à emporter, léger et facile à préparer.",
+            "instructions": "Griller le poulet coupé en lanières.\r\nCouper la tomate et la laitue.\r\nTartiner la tortilla de yaourt.\r\nGarnir, rouler et envelopper.",
+            "tempsPreparation": 25,
+            "nombrePortions": 4,
+            "image": "assets\/uploads\/img_340adf07fdbb91e5.jpg",
+            "moment": "dejeuner"
+        },
+        {
+            "id": 8,
+            "nom": "Soupe de lentilles",
+            "description": "Réconfortante, économique et riche en fibres. Elle se congèle très bien.",
+            "instructions": "Faire revenir l'oignon et l'ail.\r\nAjouter les carottes, les tomates et les lentilles.\r\nCouvrir d'eau et cuire 30 minutes.\r\nMixer à votre goût.",
+            "tempsPreparation": 40,
+            "nombrePortions": 5,
+            "image": "assets\/uploads\/img_8289f53444a20bc9.jpg",
+            "moment": "diner"
+        },
+        {
+            "id": 9,
+            "nom": "Pâtes complètes aux légumes",
+            "description": "Un plat complet et coloré, prêt en moins d'une demi-heure.",
+            "instructions": "Cuire les pâtes.\r\nFaire sauter la courgette et les tomates avec l'ail.\r\nMélanger aux pâtes.\r\nParsemer de fromage râpé.",
+            "tempsPreparation": 25,
+            "nombrePortions": 4,
+            "image": "assets\/uploads\/img_bfe5c2f7b54a05b2.jpg",
+            "moment": "dejeuner"
+        },
+        {
+            "id": 10,
+            "nom": "Curry de pois chiches",
+            "description": "Un curry végétarien, parfumé et rassasiant.",
+            "instructions": "Cuire le riz.\r\nFaire revenir l'oignon avec les épices.\r\nAjouter les tomates et les pois chiches.\r\nIncorporer les épinards en fin de cuisson.",
+            "tempsPreparation": 35,
+            "nombrePortions": 4,
+            "image": "assets\/uploads\/img_9ebb0e50c8d00015.webp",
+            "moment": "diner"
+        },
+        {
+            "id": 11,
+            "nom": "Pudding de chia aux fraises",
+            "description": "Un dessert ou petit-déjeuner sain, préparé la veille.",
+            "instructions": "Mélanger les graines de chia, le lait et le miel.\r\nLaisser gonfler au frigo toute la nuit.\r\nServir avec des fraises fraîches.",
+            "tempsPreparation": 10,
+            "nombrePortions": 2,
+            "image": "assets\/uploads\/img_f9e8157261421f0d.png",
+            "moment": "matin"
+        },
+        {
+            "id": 12,
+            "nom": "Poulet rôti & patate douce",
+            "description": "Un classique du meal prep : simple, savoureux et complet.",
+            "instructions": "Préchauffer le four à 200°C.\r\nCouper les patates douces et le brocoli.\r\nAssaisonner le poulet avec l'ail et l'huile d'olive.\r\nEnfourner 35 minutes.",
+            "tempsPreparation": 45,
+            "nombrePortions": 4,
+            "image": "assets\/uploads\/img_548b9a6d14dfa742.jpg",
+            "moment": "diner"
+        }
+    ],
+    "recette_ingredients": [
+        {
+            "idRecette": 1,
+            "idIngredient": 1,
+            "quantite": 200,
+            "unite": "g"
+        },
+        {
+            "idRecette": 1,
+            "idIngredient": 2,
+            "quantite": 500,
+            "unite": "g"
+        },
+        {
+            "idRecette": 1,
+            "idIngredient": 3,
+            "quantite": 1,
+            "unite": "pièce"
+        },
+        {
+            "idRecette": 1,
+            "idIngredient": 4,
+            "quantite": 2,
+            "unite": "cuillère à soupe"
+        },
+        {
+            "idRecette": 2,
+            "idIngredient": 5,
+            "quantite": 100,
+            "unite": "g"
+        },
+        {
+            "idRecette": 2,
+            "idIngredient": 6,
+            "quantite": 250,
+            "unite": "ml"
+        },
+        {
+            "idRecette": 2,
+            "idIngredient": 7,
+            "quantite": 2,
+            "unite": "pièce"
+        },
+        {
+            "idRecette": 8,
+            "idIngredient": 23,
+            "quantite": 250,
+            "unite": "g"
+        },
+        {
+            "idRecette": 8,
+            "idIngredient": 24,
+            "quantite": 2,
+            "unite": "pièce"
+        },
+        {
+            "idRecette": 8,
+            "idIngredient": 25,
+            "quantite": 1,
+            "unite": "pièce"
+        },
+        {
+            "idRecette": 8,
+            "idIngredient": 26,
+            "quantite": 2,
+            "unite": "pièce"
+        },
+        {
+            "idRecette": 8,
+            "idIngredient": 9,
+            "quantite": 2,
+            "unite": "pièce"
+        },
+        {
+            "idRecette": 4,
+            "idIngredient": 12,
+            "quantite": 600,
+            "unite": "g"
+        },
+        {
+            "idRecette": 4,
+            "idIngredient": 3,
+            "quantite": 1,
+            "unite": "pièce"
+        },
+        {
+            "idRecette": 4,
+            "idIngredient": 13,
+            "quantite": 200,
+            "unite": "g"
+        },
+        {
+            "idRecette": 4,
+            "idIngredient": 11,
+            "quantite": 1,
+            "unite": "pièce"
+        },
+        {
+            "idRecette": 4,
+            "idIngredient": 4,
+            "quantite": 1,
+            "unite": "cuillère à soupe"
+        },
+        {
+            "idRecette": 6,
+            "idIngredient": 7,
+            "quantite": 2,
+            "unite": "pièce"
+        },
+        {
+            "idRecette": 6,
+            "idIngredient": 18,
+            "quantite": 200,
+            "unite": "g"
+        },
+        {
+            "idRecette": 6,
+            "idIngredient": 19,
+            "quantite": 250,
+            "unite": "g"
+        },
+        {
+            "idRecette": 6,
+            "idIngredient": 20,
+            "quantite": 1,
+            "unite": "cuillère à soupe"
+        },
+        {
+            "idRecette": 6,
+            "idIngredient": 5,
+            "quantite": 30,
+            "unite": "g"
+        },
+        {
+            "idRecette": 11,
+            "idIngredient": 30,
+            "quantite": 40,
+            "unite": "g"
+        },
+        {
+            "idRecette": 11,
+            "idIngredient": 6,
+            "quantite": 250,
+            "unite": "ml"
+        },
+        {
+            "idRecette": 11,
+            "idIngredient": 20,
+            "quantite": 1,
+            "unite": "cuillère à café"
+        },
+        {
+            "idRecette": 11,
+            "idIngredient": 18,
+            "quantite": 100,
+            "unite": "g"
+        },
+        {
+            "idRecette": 10,
+            "idIngredient": 29,
+            "quantite": 400,
+            "unite": "g"
+        },
+        {
+            "idRecette": 10,
+            "idIngredient": 9,
+            "quantite": 3,
+            "unite": "pièce"
+        },
+        {
+            "idRecette": 10,
+            "idIngredient": 25,
+            "quantite": 1,
+            "unite": "pièce"
+        },
+        {
+            "idRecette": 10,
+            "idIngredient": 15,
+            "quantite": 100,
+            "unite": "g"
+        },
+        {
+            "idRecette": 10,
+            "idIngredient": 13,
+            "quantite": 200,
+            "unite": "g"
+        },
+        {
+            "idRecette": 9,
+            "idIngredient": 27,
+            "quantite": 300,
+            "unite": "g"
+        },
+        {
+            "idRecette": 9,
+            "idIngredient": 28,
+            "quantite": 2,
+            "unite": "pièce"
+        },
+        {
+            "idRecette": 9,
+            "idIngredient": 9,
+            "quantite": 4,
+            "unite": "pièce"
+        },
+        {
+            "idRecette": 9,
+            "idIngredient": 26,
+            "quantite": 2,
+            "unite": "pièce"
+        },
+        {
+            "idRecette": 9,
+            "idIngredient": 16,
+            "quantite": 40,
+            "unite": "g"
+        },
+        {
+            "idRecette": 9,
+            "idIngredient": 4,
+            "quantite": 1,
+            "unite": "cuillère à soupe"
+        },
+        {
+            "idRecette": 5,
+            "idIngredient": 14,
+            "quantite": 6,
+            "unite": "pièce"
+        },
+        {
+            "idRecette": 5,
+            "idIngredient": 15,
+            "quantite": 150,
+            "unite": "g"
+        },
+        {
+            "idRecette": 5,
+            "idIngredient": 16,
+            "quantite": 50,
+            "unite": "g"
+        },
+        {
+            "idRecette": 5,
+            "idIngredient": 4,
+            "quantite": 1,
+            "unite": "cuillère à soupe"
+        },
+        {
+            "idRecette": 5,
+            "idIngredient": 17,
+            "quantite": 1,
+            "unite": "pincée"
+        },
+        {
+            "idRecette": 12,
+            "idIngredient": 2,
+            "quantite": 600,
+            "unite": "g"
+        },
+        {
+            "idRecette": 12,
+            "idIngredient": 31,
+            "quantite": 2,
+            "unite": "pièce"
+        },
+        {
+            "idRecette": 12,
+            "idIngredient": 3,
+            "quantite": 1,
+            "unite": "pièce"
+        },
+        {
+            "idRecette": 12,
+            "idIngredient": 26,
+            "quantite": 2,
+            "unite": "pièce"
+        },
+        {
+            "idRecette": 12,
+            "idIngredient": 4,
+            "quantite": 2,
+            "unite": "cuillère à soupe"
+        },
+        {
+            "idRecette": 3,
+            "idIngredient": 1,
+            "quantite": 150,
+            "unite": "g"
+        },
+        {
+            "idRecette": 3,
+            "idIngredient": 8,
+            "quantite": 2,
+            "unite": "pièce"
+        },
+        {
+            "idRecette": 3,
+            "idIngredient": 9,
+            "quantite": 3,
+            "unite": "pièce"
+        },
+        {
+            "idRecette": 3,
+            "idIngredient": 10,
+            "quantite": 1,
+            "unite": "pièce"
+        },
+        {
+            "idRecette": 3,
+            "idIngredient": 11,
+            "quantite": 1,
+            "unite": "pièce"
+        },
+        {
+            "idRecette": 3,
+            "idIngredient": 4,
+            "quantite": 2,
+            "unite": "cuillère à soupe"
+        },
+        {
+            "idRecette": 7,
+            "idIngredient": 2,
+            "quantite": 400,
+            "unite": "g"
+        },
+        {
+            "idRecette": 7,
+            "idIngredient": 21,
+            "quantite": 4,
+            "unite": "pièce"
+        },
+        {
+            "idRecette": 7,
+            "idIngredient": 9,
+            "quantite": 2,
+            "unite": "pièce"
+        },
+        {
+            "idRecette": 7,
+            "idIngredient": 22,
+            "quantite": 100,
+            "unite": "g"
+        },
+        {
+            "idRecette": 7,
+            "idIngredient": 19,
+            "quantite": 100,
+            "unite": "g"
+        }
+    ],
+    "favoris": [
+        {
+            "idUtilisateur": 2,
+            "idRecette": 1
+        },
+        {
+            "idUtilisateur": 2,
+            "idRecette": 3
+        },
+        {
+            "idUtilisateur": 3,
+            "idRecette": 12
+        },
+        {
+            "idUtilisateur": 2,
+            "idRecette": 5
+        }
+    ],
+    "avis": [
+        {
+            "idUtilisateur": 2,
+            "idRecette": 7,
+            "note": 4,
+            "commentaire": "",
+            "date": "2026-11-24"
+        }
+    ]
+}

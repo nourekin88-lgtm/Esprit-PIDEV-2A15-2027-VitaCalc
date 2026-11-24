@@ -1,0 +1,188 @@
+/* ==========================================================================
+   VitaCalc - « Mon frigo » : un vrai frigo 3D qui s'ouvre, un placard en bois,
+   et des résultats groupés (prêtes / presque prêtes / idées).
+   ========================================================================== */
+
+#fridge { overflow-x: clip; }
+
+.fridge-tools { margin-bottom: 1.2rem; }
+
+/* ---------- Le frigo ---------- */
+.fridge-wrap { perspective: 3200px; perspective-origin: 20% 40%; padding: 0 0 .6rem; }
+.fridge { position: relative; max-width: 500px; margin: 0 auto; }
+
+.fridge-cabinet {
+    position: relative; padding: 16px 16px 22px; border-radius: 34px 34px 18px 18px;
+    background: linear-gradient(135deg, #f6f9fa 0%, #cdd8de 38%, #eef3f5 62%, #bfccd3 100%);
+    box-shadow: 0 30px 50px -18px rgba(38, 55, 70, .45), inset 0 0 0 2px rgba(255, 255, 255, .7), inset 0 -6px 14px rgba(38, 55, 70, .15);
+    transform-style: preserve-3d;
+}
+
+.fridge-inside {
+    position: relative; overflow: hidden; border-radius: 20px; min-height: 620px;
+    background: linear-gradient(180deg, #f9fdff 0%, #e4f4f8 55%, #d6edf3 100%);
+    box-shadow: inset 0 6px 22px rgba(38, 55, 70, .28), inset 0 0 0 2px rgba(255, 255, 255, .8);
+    filter: brightness(.55) saturate(.8);
+    transition: filter 1s ease .25s;
+}
+.fridge.is-open .fridge-inside { filter: none; }
+
+.fi-light { position: absolute; inset: 0 0 auto 0; height: 220px; pointer-events: none; z-index: 2;
+    background: radial-gradient(ellipse 70% 100% at 50% -10%, rgba(255, 253, 232, .95), rgba(255, 253, 232, 0) 70%); opacity: 0; transition: opacity 1s ease .3s; }
+.fridge.is-open .fi-light { opacity: 1; }
+
+.fi-mist { position: absolute; inset: 0; pointer-events: none; z-index: 3; overflow: hidden; opacity: 0; }
+.fi-mist i { position: absolute; top: -40px; width: 220px; height: 140px; border-radius: 50%; filter: blur(18px);
+    background: radial-gradient(closest-side, rgba(255, 255, 255, .85), rgba(255, 255, 255, 0)); }
+.fi-mist i:nth-child(1) { left: -30px; }
+.fi-mist i:nth-child(2) { left: 120px; width: 260px; }
+.fi-mist i:nth-child(3) { right: -40px; }
+.fridge.is-open .fi-mist { animation: fi-mist-fade 3.2s ease-out .5s 1 both; }
+.fridge.is-open .fi-mist i { animation: fi-mist-fall 3.2s ease-out .5s 1 both; }
+@keyframes fi-mist-fall { from { transform: translateY(0); } to { transform: translateY(420px); } }
+@keyframes fi-mist-fade { 0% { opacity: 0; } 25% { opacity: .9; } 100% { opacity: 0; } }
+
+.fi-scroll { position: relative; z-index: 1; padding: .4rem .2rem 1rem; }
+
+/* ---------- Étagères en verre ---------- */
+.shelf { position: relative; padding: .7rem .7rem 0; }
+.shelf::after { content: ''; display: block; height: 11px; margin: 0 -.7rem; border-radius: 3px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, .95), rgba(166, 219, 228, .7) 55%, rgba(110, 183, 197, .75));
+    box-shadow: 0 6px 10px -4px rgba(38, 55, 70, .35); }
+.shelf-label { display: inline-flex; align-items: center; gap: .4rem; margin: 0 0 .1rem; padding: .1rem .55rem; border-radius: 50px;
+    font-family: 'Inter', sans-serif; font-size: .68rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    color: #3d6670; background: rgba(255, 255, 255, .65); }
+.shelf-label i { color: var(--vc-primary-strong); }
+.shelf-items { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 0 .2rem; padding: .2rem 0 .55rem; }
+.shelf[hidden] { display: none !important; }
+
+/* Bac à légumes : un tiroir transparent */
+.shelf-legumes { margin: .9rem .7rem .2rem; padding: .6rem .6rem 0; border-radius: 16px; border: 2px solid rgba(110, 183, 197, .75);
+    background: linear-gradient(180deg, rgba(255, 255, 255, .25), rgba(166, 219, 228, .45)); box-shadow: inset 0 -8px 14px rgba(110, 183, 197, .25); }
+.shelf-legumes::after { display: none; }
+.shelf-legumes::before { content: ''; position: absolute; left: 50%; bottom: -3px; width: 70px; height: 7px; margin-left: -35px; border-radius: 6px; background: #b3c4cc; }
+
+/* Balconnet de porte */
+.shelf-porte .shelf-items { padding-bottom: .5rem; }
+.shelf-porte::after { background: linear-gradient(180deg, #fff, #cfe9ef 60%, #9fcdd8); }
+
+/* ---------- Ingrédient posé sur l'étagère ---------- */
+.fi { position: relative; display: flex; flex-direction: column; align-items: center; gap: .3rem; padding: .35rem .1rem .15rem; cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent; }
+.fi input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.fi .ing-thumb { width: 60px; height: 60px; margin: 0; font-size: 1.7rem; box-shadow: 0 8px 8px -5px rgba(38, 55, 70, .4), inset 0 0 0 2px rgba(255, 255, 255, .6); transition: transform .22s cubic-bezier(.3, 1.6, .5, 1), box-shadow .22s; }
+.fi:hover .ing-thumb { transform: translateY(-5px); }
+.fi-nm { font-size: .72rem; font-weight: 600; text-align: center; line-height: 1.15; color: #2c4a55; max-width: 90px; }
+.fi-ck { position: absolute; top: .1rem; left: calc(50% + 14px); width: 22px; height: 22px; border-radius: 50%; background: var(--vc-primary-strong); color: #fff; border: 2px solid #fff;
+    display: flex; align-items: center; justify-content: center; font-size: .75rem; transform: scale(0); transition: transform .22s cubic-bezier(.3, 1.8, .5, 1); box-shadow: 0 3px 6px rgba(38, 55, 70, .3); }
+.fi:has(input:checked) .ing-thumb { transform: translateY(-6px) scale(1.06); box-shadow: 0 0 0 3px #fff, 0 0 0 6px var(--vc-primary), 0 14px 18px -4px rgba(36, 168, 154, .55); }
+.fi:has(input:checked) .fi-ck { transform: scale(1); }
+.fi:has(input:checked) .fi-nm { color: var(--vc-primary-deep); }
+.fi:has(input:focus-visible) .ing-thumb { outline: 3px solid var(--vc-ink); outline-offset: 3px; }
+.fi[hidden] { display: none !important; }
+.fi-nomatch { text-align: center; color: #3d6670; padding: 2rem 1rem; margin: 0; font-weight: 600; }
+
+/* Les ingrédients « sortent » à l'ouverture */
+.fridge .fi { opacity: 0; transform: translateY(14px); }
+.fridge.is-open .fi { animation: fi-pop .5s cubic-bezier(.2, 1.3, .4, 1) both; animation-delay: calc(var(--n, 0) * 28ms + .55s); }
+@keyframes fi-pop { from { opacity: 0; transform: translateY(14px) scale(.9); } to { opacity: 1; transform: none; } }
+
+/* ---------- La porte ---------- */
+.fridge-door { position: absolute; inset: 0; z-index: 5; transform-origin: 0 50%; transform-style: preserve-3d;
+    transition: transform 1.25s cubic-bezier(.6, .05, .2, 1); will-change: transform; }
+.fridge.is-open .fridge-door { transform: rotateY(-104deg); }
+
+.door-face { position: absolute; inset: 0; border-radius: 34px 34px 18px 18px; backface-visibility: hidden; -webkit-backface-visibility: hidden; overflow: hidden; }
+.door-front {
+    background:
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, .0) 0 3px, rgba(255, 255, 255, .13) 3px 4px),
+        linear-gradient(135deg, #fbfdfd 0%, #dbe5ea 35%, #f1f6f8 58%, #c3d0d7 100%);
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .85), inset 0 -10px 24px rgba(38, 55, 70, .16), 0 8px 24px rgba(38, 55, 70, .2);
+}
+.door-freezer { position: absolute; inset: 0 0 auto 0; height: 24%; border-bottom: 3px solid rgba(38, 55, 70, .18); box-shadow: 0 2px 0 rgba(255, 255, 255, .8); }
+.door-main { position: absolute; inset: 24% 0 0 0; }
+.hdl { position: absolute; width: 14px; border-radius: 10px; right: 26px;
+    background: linear-gradient(90deg, #8e9ca5, #e6edf0 45%, #9aa8b0); box-shadow: 2px 4px 8px rgba(38, 55, 70, .35); }
+.hdl-top { height: 70px; bottom: 16px; }
+.hdl-main { height: 150px; top: 24px; }
+.door-logo { position: absolute; left: 26px; top: 28px; width: 56px; height: 56px; padding: 7px; border-radius: 50%; background: #fff; box-shadow: 0 4px 10px rgba(38, 55, 70, .25); object-fit: contain; }
+.door-note { position: absolute; left: 34px; top: 34%; width: 118px; padding: .7rem .6rem .6rem; background: #fff3a8; color: #5a4a00; transform: rotate(-4deg);
+    box-shadow: 0 8px 14px rgba(38, 55, 70, .25); display: flex; flex-direction: column; align-items: center; line-height: 1.15; font-size: .78rem; font-weight: 600; text-align: center; }
+.door-note::before { content: ''; position: absolute; top: -9px; left: 50%; width: 16px; height: 16px; margin-left: -8px; border-radius: 50%; background: var(--vc-danger); box-shadow: 0 2px 4px rgba(0, 0, 0, .35); }
+.door-note b { font-family: 'Poppins', sans-serif; font-size: 2rem; line-height: 1; }
+.door-hint { position: absolute; left: 50%; bottom: 40px; transform: translateX(-50%); white-space: nowrap; padding: .55rem 1.1rem; border-radius: 50px;
+    background: var(--vc-ink); color: #fff; font-size: .85rem; font-weight: 600; box-shadow: 0 8px 18px rgba(38, 55, 70, .35); animation: door-pulse 2.2s ease-in-out infinite; }
+.door-hint i { margin-right: .35rem; }
+@keyframes door-pulse { 0%, 100% { transform: translateX(-50%) scale(1); } 50% { transform: translateX(-50%) scale(1.07); } }
+.door-hit { position: absolute; inset: 0; width: 100%; border: 0; background: transparent; cursor: pointer; border-radius: inherit; }
+.door-hit:focus-visible { outline: 4px solid var(--vc-primary); outline-offset: -8px; }
+.door-front:hover { filter: brightness(1.03); }
+
+.door-back { transform: rotateY(180deg); background: linear-gradient(135deg, #ffffff, #e4eef2); box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .9), inset 0 0 24px rgba(38, 55, 70, .18); }
+.door-back .rail { position: absolute; left: 12%; right: 12%; height: 56px; border-radius: 0 0 14px 14px; border: 2px solid rgba(110, 183, 197, .8); border-top: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, .15), rgba(166, 219, 228, .55)); box-shadow: 0 8px 10px -6px rgba(38, 55, 70, .35); }
+.door-back .r1 { top: 24%; } .door-back .r2 { top: 48%; } .door-back .r3 { top: 72%; }
+
+/* Le frigo ouvert glisse un peu vers la droite pour laisser la place à la porte */
+.fridge-wrap .fridge { transition: transform 1.2s cubic-bezier(.6, .05, .2, 1); }
+@media (min-width: 992px) { .fridge-wrap:has(.is-open) .fridge { transform: translateX(60px); } }
+
+.fridge-feet { display: flex; justify-content: space-between; padding: 0 42px; margin-top: -2px; }
+.fridge-feet i { width: 54px; height: 14px; border-radius: 0 0 10px 10px; background: linear-gradient(#59656d, #2c363d); }
+.fridge-floor { height: 26px; margin: -8px 4% 0; border-radius: 50%; background: radial-gradient(closest-side, rgba(38, 55, 70, .38), rgba(38, 55, 70, 0)); }
+
+/* ---------- Barre sous le frigo ---------- */
+.fridge-bar { display: flex; align-items: center; flex-wrap: wrap; gap: .75rem; max-width: 500px; margin: .4rem auto 0; }
+.fridge-bar .fridge-count { font-size: .82rem; font-weight: 700; padding: .3rem .85rem; border-radius: 50px; background: #EDF1F4; color: var(--vc-ink-soft); }
+.fridge-bar .fridge-count.on { background: var(--vc-primary-strong); color: #fff; }
+.fridge-bar [hidden] { display: none !important; }
+
+/* ---------- Placard en bois ---------- */
+.cupboard { max-width: 500px; margin: 2rem auto 0; padding: 14px; border-radius: 18px;
+    background: linear-gradient(135deg, #d6a773, #b98450 55%, #cf9d68); box-shadow: 0 18px 30px -14px rgba(60, 35, 10, .5), inset 0 0 0 2px rgba(255, 230, 190, .45); }
+.cupboard-in { border-radius: 10px; background: linear-gradient(180deg, #f2dfc2, #e6cba3); box-shadow: inset 0 6px 16px rgba(80, 45, 10, .35); padding-bottom: .3rem; }
+.cupboard .shelf::after { height: 12px; border-radius: 2px; background: linear-gradient(180deg, #d9b283, #a8773f); box-shadow: 0 6px 8px -4px rgba(60, 35, 10, .45); }
+.cupboard .shelf-label { background: rgba(255, 255, 255, .55); color: #6a4519; }
+.cupboard .shelf-label i { color: #8a5a22; }
+.cupboard .fi-nm { color: #4d3418; }
+.cupboard .ing-thumb { box-shadow: 0 8px 8px -5px rgba(60, 35, 10, .5); }
+
+/* ---------- Résultats ---------- */
+.fr-summary { margin: 0 0 1rem; font-weight: 600; color: var(--vc-primary-deep); }
+.fr-group { display: flex; align-items: center; gap: .6rem; margin: .8rem 0 .1rem; font-family: 'Poppins', 'Inter', sans-serif; font-size: 1rem; font-weight: 600; color: var(--vc-ink); }
+.fr-group:first-child { margin-top: 0; }
+.fr-group .n { font-family: 'Inter', sans-serif; font-size: .78rem; font-weight: 700; padding: .1rem .6rem; border-radius: 50px; background: var(--vc-tint); color: var(--vc-primary-deep); }
+.fr-group.full { color: var(--vc-primary-deep); }
+.fr-group::after { content: ''; flex: 1; height: 1px; background: var(--vc-border); }
+
+.fc-ings { display: flex; flex-wrap: wrap; gap: .35rem; margin-bottom: .5rem; }
+.fc-ing { display: inline-flex; align-items: center; gap: .35rem; padding: .15rem .6rem .15rem .15rem; border-radius: 50px; font-size: .76rem; font-weight: 600; line-height: 1.2; }
+.fc-ing .th { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; overflow: hidden; background: #fff; font-size: .8rem; flex: 0 0 24px; }
+.fc-ing .th img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.fc-ing.have { background: var(--vc-tint); color: var(--vc-primary-deep); }
+.fc-ing.have::after { content: '\2713'; font-weight: 800; }
+.fc-ing.miss { background: #fff; color: var(--vc-muted); border: 1.5px dashed #b9c9c5; padding-top: calc(.15rem - 1.5px); padding-bottom: calc(.15rem - 1.5px); }
+.fc-ing.miss .th { filter: grayscale(1); opacity: .65; background: #f1f4f5; }
+
+.fridge-card { transition: transform .2s, box-shadow .2s; }
+.fridge-card:hover { transform: translateY(-2px); box-shadow: var(--vc-shadow); }
+.fridge-card .fc-have { color: var(--vc-primary-deep); font-weight: 600; }
+
+@media (max-width: 991.98px) {
+    .fridge-wrap { perspective: 2200px; }
+    .fridge.is-open .fridge-door { transform: rotateY(-100deg); opacity: 0; transition: transform 1.1s cubic-bezier(.6, .05, .2, 1), opacity .5s ease .75s; }
+    .fridge-door { transition: transform 1.1s cubic-bezier(.6, .05, .2, 1), opacity .3s; }
+    .fridge-inside { min-height: 0; }
+}
+@media (max-width: 420px) {
+    .fi .ing-thumb { width: 52px; height: 52px; }
+    .shelf-items { grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); }
+    .door-note { width: 100px; left: 22px; }
+    .hdl { right: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .fridge-door, .fridge-inside, .fi-light, .fridge-wrap .fridge, .fi .ing-thumb { transition-duration: .01s !important; transition-delay: 0s !important; }
+    .fridge.is-open .fi { animation: none; opacity: 1; transform: none; }
+    .fridge .fi { opacity: 1; transform: none; }
+    .door-hint { animation: none; }
+    .fi-mist { display: none; }
+}

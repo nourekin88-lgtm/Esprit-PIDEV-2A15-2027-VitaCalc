@@ -1,0 +1,20 @@
+PHOTOS DES RECETTES
+===================
+Pour afficher VOS photos (au lieu des photos automatiques), mettez-les dans CE dossier
+avec exactement ces noms (format .jpg) :
+
+bowl-poulet-quinoa.jpg           (déjà fournie)
+overnight-oats-banane.jpg
+salade-quinoa-avocat.jpg
+saumon-grille-brocoli.jpg
+omelette-epinards.jpg
+smoothie-bowl-fraise-banane.jpg
+wrap-poulet-legumes.jpg
+soupe-lentilles.jpg
+pates-completes-legumes.jpg
+curry-pois-chiches.jpg
+pudding-chia-fraises.jpg
+poulet-roti-patate-douce.jpg
+
+Si un fichier est absent, le site affiche automatiquement une photo à la place.
+Vous pouvez aussi changer la photo d'une recette depuis le Back Office (bouton Modifier).
